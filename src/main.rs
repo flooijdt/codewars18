@@ -1,6 +1,6 @@
 fn main() {
     let c: CaesarCipher = CaesarCipher::new(5);
-    println!("{}", c.encode("mess"));
+    println!("{}", c.encode("Codewars"));
 }
 
 struct CaesarCipher {
@@ -19,9 +19,6 @@ impl CaesarCipher {
             .chars()
             .map(|x| (x as u8 + self.shift as u8) as char)
             .collect();
-
-        // println!("{}", vecky);
-        // "string".to_string()
         vecky
     }
 
