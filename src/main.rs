@@ -1,6 +1,6 @@
 fn main() {
     let c: CaesarCipher = CaesarCipher::new(5);
-    c.encode("mess");
+    println!("{}", c.encode("mess"));
 }
 
 struct CaesarCipher {
@@ -13,15 +13,16 @@ impl CaesarCipher {
     }
 
     fn encode(&self, message: &str) -> String {
-        let mut vecky: Vec<char> = Vec::new();
-
         let messageu = message.to_uppercase();
 
-        vecky = messageu.chars().collect();
+        let vecky: String = messageu
+            .chars()
+            .map(|x| (x as u8 + self.shift as u8) as char)
+            .collect();
 
-        println!("{:x}", vecky[0] as u32);
-        println!("{}", String::from("\u{004D}"));
-        "string".to_string()
+        // println!("{}", vecky);
+        // "string".to_string()
+        vecky
     }
 
     fn decode(&self, message: &str) -> String {
