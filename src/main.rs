@@ -19,32 +19,34 @@ impl CaesarCipher {
     fn encode(&self, message: &str) -> String {
         let messageu = message.to_uppercase();
 
-        let mut vecky2: Vec<u8> = messageu
-            .chars()
-            .map(|x| (x as u8 + self.shift as u8))
-            .collect();
+        let mut vecky: Vec<u8> = messageu.chars().map(|x| x as u8).collect();
 
-        for i in vecky2.iter_mut() {
-            if *i > 90 {
-                *i = 64 + *i - 90;
+        for i in vecky.iter_mut() {
+            if *i < 91 && *i > 64 {
+                *i += self.shift as u8;
+                if *i > 90 {
+                    *i = 64 + *i - 90;
+                }
             }
         }
-        vecky2.iter().map(|x| *x as char).collect()
+
+        vecky.iter().map(|x| *x as char).collect()
     }
 
     fn decode(&self, message: &str) -> String {
         let messageu = message.to_uppercase();
 
-        let mut vecky2: Vec<u8> = messageu
-            .chars()
-            .map(|x| (x as u8 - self.shift as u8))
-            .collect();
+        let mut vecky: Vec<u8> = messageu.chars().map(|x| x as u8).collect();
 
-        for i in vecky2.iter_mut() {
-            if *i < 65 {
-                *i = *i + 90 - 64;
+        for i in vecky.iter_mut() {
+            if *i < 91 && *i > 64 {
+                *i -= self.shift as u8;
+                if *i < 65 {
+                    *i = *i + 90 - 64;
+                }
             }
         }
-        vecky2.iter().map(|x| *x as char).collect()
+
+        vecky.iter().map(|x| *x as char).collect()
     }
 }
