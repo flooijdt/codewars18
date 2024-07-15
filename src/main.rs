@@ -1,4 +1,6 @@
 fn main() {
+    let c: CaesarCipher = CaesarCipher::new(5);
+    c.encode("mess");
     println!("Hello, world!");
 }
 
@@ -12,7 +14,10 @@ impl CaesarCipher {
     }
 
     fn encode(&self, message: &str) -> String {
-        todo!();
+        let mut vecky: Vec<char> = Vec::new();
+        vecky = message.chars().collect();
+        println!("{:#?}", vecky);
+        "string".to_string()
     }
 
     fn decode(&self, message: &str) -> String {
